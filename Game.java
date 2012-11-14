@@ -3,7 +3,7 @@ public class Game
 	// Dx stjórnar hraða og stefnu óvinanna.
 	private int Dx = 1;
 	
-	//Git
+	//Git 2
 	
 	private boolean running = true;
 	
