@@ -9,7 +9,7 @@ public class Game
 	// Set þessa breytu = true í constructornum.
 	private boolean running;
 	
-	public Gun player;
+	public Player player;
 	// invader[] er fylki af óvinum og init_pos[] eru upphafshnit þeirra.
 	// veit ekki endilega hvort það sé sniðugt að hafa þá Point2D.
 	public Invader[] invader;
@@ -38,7 +38,7 @@ public class Game
 	{
 		// ATH. etv. þarf að breyta nöfnum á Gun, Bomb, Shot etc…
 		running = true;
-		player = new Gun();
+		player = new Player();
 		invader = new Invader[NUMBER_OF_INVADERS];
 		for (int i = 0; i < invader.length; i++)
 			{	invader[i] = new Invader(init_pos[i]);	}
