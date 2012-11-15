@@ -17,8 +17,9 @@ public class Game
 	
 	
 	/*
-	 * Mikilvægt: breyta Invader klasanum. Búa til nýjan Rectangle sem
-	 * er border utan um skjáinn. Hann athugar í hverju kalli á update()
+	 * Mikilvægt: breyta Invader klasanum.
+	 * Búa til nýjan Rectangle inni í Game klasanum sem er
+	 * border utan um skjáinn. Hann athugar í hverju kalli á update()
 	 * hvort að geimskip hafi rekist á sig:
 	 * 
 	 * Dæmi um aðferð:
