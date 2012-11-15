@@ -4,7 +4,7 @@ public class Game
 	private int Dx = 1;
 	
 	//Git
-	private static final int NUMBER_OF_ALIENS = /*Fylla inn upphafsfjölda*/;
+	private static final int NUMBER_OF_INVADERS = /*Fylla inn upphafsfjölda*/;
 	
 	// Set þessa breytu = true í constructornum.
 	private boolean running;
@@ -16,12 +16,29 @@ public class Game
 	private Point2D[] init_pos = {/*Fylla inn upphafshnit*/};
 	
 	
+	/*
+	 * Mikilvægt: breyta Invader klasanum. Búa til nýjan Rectangle sem
+	 * er border utan um skjáinn. Hann athugar í hverju kalli á update()
+	 * hvort að geimskip hafi rekist á sig:
+	 * 
+	 * Dæmi um aðferð:
+	 *
+	 * for (int i = 0; i < invader.length; i++) {
+	 * 		if (invader[i].atBounds()) {
+	 *			game.setDx = -1 * game.getDx;
+	 *			break;	
+	 *		}
+	 * }
+	 * 
+	 */
+	
+	
 	public Game()
 	{
 		// ATH. etv. þarf að breyta nöfnum á Gun, Bomb, Shot etc…
 		running = true;
 		player = new Gun();
-		invader = new Invader[NUMBER_OF_ALIENS];
+		invader = new Invader[NUMBER_OF_INVADERS];
 		for (int i = 0; i < invader.length; i++)
 			{	invader[i] = new Invader(init_pos[i]);	}
 		
@@ -31,7 +48,7 @@ public class Game
 	
 	public void update()
 	{
-		shot.update();
+		player.updateShot();
 		bomb.update();
 		player.update();
 		for (int i = 0; i < invader.length; i++)
@@ -46,8 +63,8 @@ public class Game
 	public void render()
 	{
 		StdDraw.clear();
-		shot.render();
-		bomb.render();
+		player.renderShot();
+		/* bomb.render(); */
 		player.render();
 		for (int i = 0; i < invaders.length; i++)
 			{	invaders[i].render();	}
