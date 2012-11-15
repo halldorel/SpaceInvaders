@@ -4,29 +4,38 @@ public class Game
 	private int Dx = 1;
 	
 	//Git
+	private static final int NUMBER_OF_ALIENS = /*Fylla inn upphafsfjölda*/;
 	
-	private boolean running = true;
+	// Set þessa breytu = true í constructornum.
+	private boolean running;
 	
 	public Gun player;
+	// invader[] er fylki af óvinum og init_pos[] eru upphafshnit þeirra.
+	// veit ekki endilega hvort það sé sniðugt að hafa þá Point2D.
+	public Invader[] invader;
+	private Point2D[] init_pos = {/*Fylla inn upphafshnit*/};
+	
 	
 	public Game()
 	{
+		// ATH. etv. þarf að breyta nöfnum á Gun, Bomb, Shot etc…
 		running = true;
 		player = new Gun();
+		invader = new Invader[NUMBER_OF_ALIENS];
+		for (int i = 0; i < invader.length; i++)
+			{	invader[i] = new Invader(init_pos[i]);	}
 		
 		
 	}
 	
-	// Muna: búa til nýtt fylki af Invader-um
-	// Búa til player, shot, bomb
 	
 	public void update()
 	{
 		shot.update();
 		bomb.update();
 		player.update();
-		for (int i = 0; i < invaders.length; i++)
-			{	invaders[i].update();	}
+		for (int i = 0; i < invader.length; i++)
+			{	invader[i].update();	}
 	}
 	
 	/*
