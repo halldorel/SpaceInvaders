@@ -11,8 +11,9 @@ public class Game
 	
 	public Game()
 	{
-		
+		running = true;
 		player = new Gun();
+		
 		
 	}
 	
