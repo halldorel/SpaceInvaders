@@ -1,24 +1,18 @@
-public class Shot //extends Rectangle
+public class Shot
 {
-	// X position of shooter
-	private final double xpos;
-	private double ypos;
+	// (x, y) miðpunktur skotsins
+	private final double x;
+	private double y;
 	
-	// 
 	private final static double INIT_YPOS = 1.0;
-	private final static double SIZE = 4;
-	private final static double SPEED = 4;
+	private final static double SIZE = 4.0;
+	private final static double SPEED = 4.0;
 	
-	// Rectangle object
+	// Rectangle hlutur fyrir skotið
 	private Rectangle shot;
 	
-	// Has the shot exited the screen?
+	// Er skotið innan skjáramma?
 	private boolean alive;
-	
-	// Speed constant
-	// public static speed = 0.1;
-	
-	// AÐLAGA SHOT.JAVA SVO HANN ERFI FRÁ RECTANGLE
 	
 	public Shot(double xpos, int direction)
 	{
@@ -46,7 +40,8 @@ public class Shot //extends Rectangle
 	{
 		if(this.alive == true)
 		{
-			shot.draw();
+			// Rectangle show
+			shot.show();
 		}
 	}
 	
