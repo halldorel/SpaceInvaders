@@ -98,7 +98,7 @@ public class Gun
 			
 	public void shoot()
 	{
-		shot = new Shot(x);
+		game.HeroShot = new Shot(x);
 	}
 	
 	public void updateShot()

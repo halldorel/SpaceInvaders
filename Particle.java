@@ -3,18 +3,17 @@ import java.awt.Color;
 
 public class Particle
 {
-	public static final int ALIVE = 1;
-	public static final int DEAD = 0;
+	private static final int ALIVE = 1;
+	private static final int DEAD = 0;
 	
-	public static final int LIFETIME = 100;
-	public static final int MAX_RADIUS = 5;
-	public static final int MAX_SPEED = 10;
-	
+	private static final int MAX_RADIUS = 3;
+	private static final int MIN_RADIUS = 2;	
+	private static final int MAX_SPEED = 12;
+		
 	private int state;
 	
 	private double x, y, radius;
 	private double velX, velY;
-	private int age, lifetime;
 	private int red, green, blue, alpha;
 	private Color color;
 	
@@ -44,12 +43,13 @@ public class Particle
 		this.x = x;
 		this.y = y;
 		this.state = Particle.ALIVE;
-		this.radius = r.nextFloat(MAX_RADIUS);
-		this.lifetime = Particle.LIFETIME;
-		this.age = 0;
+		this.radius = r.nextInt(MAX_RADIUS - MIN_RADIUS) + MIN_RADIUS;
 		
-		this.velX = r.nextDouble(MAX_SPEED);
-		this.velY = r.nextDouble(MAX_SPEED);
+		this.velX = r.nextInt(MAX_SPEED);
+		this.velY = r.nextInt(MAX_SPEED);
+		
+		velX = (r.nextInt(2) == 1) ? -velX : velX;
+		velY = (r.nextInt(2) == 1) ? -velY : velY;
 		
 		// Hægjum á ögnum sem eru bæði með hátt velX og hátt velY
 		if ((velX * velX + velY * velY) > MAX_SPEED * MAX_SPEED)
@@ -58,7 +58,7 @@ public class Particle
 		this.red = r.nextInt(255);
 		this.green = r.nextInt(255);
 		this.blue = r.nextInt(255);
-		this.alpha = r.nextInt(255);
+		this.alpha = r.nextInt(55) + 200;
 		
 		this.color = new Color(red, green, blue, alpha);
 		
@@ -70,18 +70,16 @@ public class Particle
 			this.x += this.velX;
 			this.y += this.velY;
 			
-			this.alpha -= 2;
+			this.alpha -= 3;
 			if (alpha <= 0)
 				{	this.state = DEAD;	}
 			else {
 				color = new Color(red, green, blue, alpha);
-				this.age++;
 			}
-			if (this.age > this.lifetime)
-				{	this.state = DEAD;	}
 		}
 	}
-	
+
+/*	
 	// Ef við viljum að agnirnar skoppi af rammanum
 	public void update(Rectangle box) {
 		if (this.state != DEAD) {
@@ -92,9 +90,11 @@ public class Particle
 		}
 		update();
 	}
+*/
 		
 	public void render() {
 		StdDraw.setPenColor(this.color);
 		StdDraw.filledSquare(this.x, this.y, this.radius);
 	}
+}
 		

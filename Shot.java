@@ -4,47 +4,49 @@ public class Shot
 	private final double x;
 	private double y;
 	
+	private static final int WIDTH = 4;
+	private static final int HEIGHT = 4;
+	private static final boolean ALIVE = true;
+	private static final boolean DEAD = false;
+	
+	//Direction true ef um Hero er að ræða, false ef um invader er að ræða
+	private boolean direction;
+	
 	private final static double INIT_YPOS = 1.0;
 	private final static double SIZE = 4.0;
 	private final static double SPEED = 4.0;
 	
 	// Rectangle hlutur fyrir skotið
-	private Rectangle shot;
+	private Rectangle bounds;
 	
 	// Er skotið innan skjáramma?
-	private boolean alive;
+	private boolean status;
 	
-	public Shot(double xpos, int direction)
-	{
-		this.xpos = xpos;
-		this.ypos = INIT_YPOS;
-		this.shot = new Rectangle(this.xpos, INIT_YPOS, SIZE, SIZE);
-		this.alive = true;
+	public Shot(double x, double y, boolean direction, boolean status) {
+		this.x = x;
+		this.y = INIT_YPOS;
+		this.status = status;
+		this.direction = direction;
+		bounds = new Rectangle(x, y, WIDTH, HEIGHT);
 	}
 	
-	public void update()
-	{
-		if(alive)
-		{
-			// 
-			this.shot.setY(this.shot.getY() + SPEED);
+	public void update() {
+		if(status) {
+			if(direction) bounds.setY(this.bounds.getY() + SPEED);
+			else bounds.setY(this.bounds.getY() - SPEED);
+			
 		}
 	}
 	
-	public void kill()
-	{
-		this.alive = false;
+	public void kill() {
+		status = DEAD;
 	}
 	
-	public void draw()
-	{
-		if(this.alive == true)
-		{
-			// Rectangle show
-			shot.show();
+	public void draw() {
+		if(status) {
+			bounds.show();
 		}
 	}
-	
 	
 	// Testing
 	public void testDraw()
@@ -54,7 +56,7 @@ public class Shot
 		
 		draw();
 		
-		String status = "Y = " + this.shot.getY();
+		String status = "Y = " + bounds.getY();
 		StdDraw.clear();
 		//StdDraw.text(3, 3, status);
 	}
@@ -62,7 +64,7 @@ public class Shot
 	// Test client
 	public static void main(String[] args)
 	{
-		Shot s = new Shot(256, 10);
+		Shot s = new Shot(256, 10, true);
 		while(true)
 		{
 			s.update();

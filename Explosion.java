@@ -11,7 +11,7 @@ public class Explosion
 	
 	public Explosion(int size, double x, double y) {
 		this.state = ALIVE;
-		this.size = size
+		this.size = size;
 		this.particles = new Particle[size];
 		for (int i = 0; i < particles.length; i++)
 			{	this.particles[i] = new Particle(x, y);	  }
@@ -31,6 +31,7 @@ public class Explosion
 		}
 	}
 	
+/*	
 	// Ef við viljum að agnirnar skoppi af rammanum
 	public void update(Rectangle box) {
 		if (this.state != DEAD) {
@@ -45,10 +46,10 @@ public class Explosion
 				{	this.state = DEAD;	}
 		}
 	}
-	
+*/	
 	public void render() {
 		for (int i = 0; i < particles.length; i++) {
-			if (particles[i].isAlive) {
+			if (particles[i].isAlive()) {
 				particles[i].render();
 			}
 		}

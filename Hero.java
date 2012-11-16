@@ -2,6 +2,7 @@
 import java.awt.event.*;
 
 public class Hero
+<<<<<<< HEAD
 {
 	//  0 < x < 512 staðsetning hetju
 	private double xpos;
@@ -18,11 +19,23 @@ public class Hero
 	// Leyfilegt svæði hetju
 	private static final double MIN_X = 0;
 	private static final double MAX_X = 512;
+=======
+{			
+	// Fastar
+	private static final int DX = 4;
+
+	private static final int X_OFFSET = 5;
+	
+	// Leyfilegt svæði hetju
+	private static final double MIN_X = 0	+X_OFFSET;
+	private static final double MAX_X = 512	-X_OFFSET;
+>>>>>>> 060db2f32793ad9bbdc1fba3ca485afbe3173d54
 	
 	// Lyklar fyrir vinstri-hægri hreyfingar hetju
 	private static final int LEFT = KeyEvent.VK_A;
 	private static final int RIGHT = KeyEvent.VK_D;
 	
+<<<<<<< HEAD
 	// Stærð hetju
 	private static final int WIDTH = 30;
 	private static final int HEIGHT = 10;
@@ -31,11 +44,36 @@ public class Hero
 	private static boolean alive = true;
 	
 	// Constructor
+=======
+	private static final int INIT_LIVES = 5;
+	
+	//  0 < x < 512 staðsetning hetju
+	private double xpos;
+	// y staðsetning hetju
+	private static double ypos = 0;
+	// Búum til Rectangle hlut fyrir hetjuna
+	private Rectangle bounds;
+	private int lives;
+	private Explosion explosion;
+	private boolean alive;
+	
+	
+>>>>>>> 060db2f32793ad9bbdc1fba3ca485afbe3173d54
 	public Hero(double xpos)
 	{
 		this.xpos = xpos;
 		// ATH hér eru einhverjar temp stærðir á hetju (30, 10))
+<<<<<<< HEAD
 		this.bounds = new Rectangle(xpos, ypos, 30, 10);
+=======
+		this.hero = new Rectangle(xpos, ypos, 30, 10);
+		this.lives = INIT_LIVES;
+		this.alive = true;
+		
+		// Búum til sprengingu af stærð núll til þess að explosion.update()
+		// krassi ekki forritinu.
+		explosion = new Explosion(0, 1, 1);
+>>>>>>> 060db2f32793ad9bbdc1fba3ca485afbe3173d54
 	}
 	
 	public double getX()
@@ -43,10 +81,21 @@ public class Hero
 		return this.xpos;
 	}
 
+
+
 	public void update()
 	{
-		// Bregðast við 
+	
+		if (this.collides(game.EvilBomb) {
+			this.lives--;
+			explosion = new Explosion(20, xpos, ypos);
+		}
+		if (lives <= 0)
+			{	this.alive = false;	}
+			
+		
 		if (StdDraw.isKeyPressed(LEFT))
+<<<<<<< HEAD
 			{
 				// GAME FRAME - breyta skv Game.java
 				if (this.xpos > MIN_X + WIDTH/2)
@@ -84,6 +133,35 @@ public class Hero
 	public boolean collides(Rectangle r)
 	{
 		return this.bounds.intersects(r);
+=======
+		{
+			if (this.xpos > MIN_X)
+				{	xpos = (xpos - DX);		}
+		}
+		else if (StdDraw.isKeyPressed(RIGHT))
+		{
+			if (this.xpos < MAX_X)
+				{	xpos = (xpos + DX);		}
+		}
+		
+		explosion.update();
+
+	}
+	
+	
+	
+	public void render()
+	{
+		if this(alive) {
+			hero.show();
+		}
+		explosion.render();
+	}
+		
+	public void shoot()
+	{
+		game.HeroShot = new Shot(xpos, ypos, true, true);
+>>>>>>> 060db2f32793ad9bbdc1fba3ca485afbe3173d54
 	}
 
 	// Test client
