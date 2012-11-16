@@ -6,7 +6,7 @@ public class Hero
 	//  0 < x < 512 staðsetning hetju
 	private double xpos;
 	
-	//Hraði hetju
+	// Hraði hetju
 	private static final int SPEED = 4;
 	
 	// Búum til Rectangle hlut fyrir hetjuna
@@ -76,10 +76,10 @@ public class Hero
 	}
 
 	public void draw()
-		{
-			// Rectangle draw
-			hero.show();
-		}
+	{
+		// Rectangle draw
+		bounds.show();
+	}
 
 	public boolean collides(Rectangle r)
 	{
@@ -91,7 +91,7 @@ public class Hero
 	{
 		while(true)
 		{
-			
+			StdDraw.rectangle(1, 1, 1, 1);
 		}
 	}
 }
