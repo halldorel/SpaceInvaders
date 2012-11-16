@@ -29,20 +29,20 @@ public class Brick
 	
 	public void kill()
 	{
-		this.state == DEAD;
-		b = new Explosion(x, y);
+		this.state = DEAD;
+		b = new Explosion(20, this.x, this.y);
 	}
-	
+/*	
 	public void checkCollision()
 	{
 		
 		// if (blablabla)	lives--;	
 	}
-	
+*/	
 	public void update()
 	{
 		if (this.isAlive()) {
-			checkCollision()
+			//checkCollision();
 			if (lives <= 0)
 				{	this.state = DEAD;	}
 		}	
@@ -62,5 +62,5 @@ public class Brick
 	}
 	
 	
-	
+}
 	
