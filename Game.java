@@ -1,12 +1,12 @@
 public class Game
 {
 	// Dx stjórnar hraða og stefnu óvinanna.
-	private int Dx = 1;
+	private int Dx = 4;
 	
 	
 	//Fjöldi invadera
-	private static final int ARMY = 32;
-	private static final int COVER = 5;
+	private static final int INIT_INVADERS = 36;
+	private static final int INIT_BUNKERS = 5;
 	
 	//Shot 
 	public Shot HeroShot;
@@ -16,6 +16,8 @@ public class Game
 	
 	public Hero hero;
 	
+/*	skrýtið
+
 	public Rectangle GameFrame(double x0, double y0, double w, double h) {
 		x0 = 256;
 		xy = 256;
@@ -23,6 +25,19 @@ public class Game
 		h = 512;
 	}
 	
+*/
+	private Invader[] invaders;
+	private Bunker[] bunkers;
+	
+	private double[] invaderPos = { 48, 48, 106, 48, 164, 48, 212, 28, 270, 48, 328, 48,
+									48, 106, 106, 106, 164, 106, 212, 106, 270, 106, 328, 106,
+									48, 164, 106, 164, 164, 164, 212, 164, 270, 164, 328, 164,
+									48, 212, 106, 212, 164, 212, 212, 212, 270, 212, 328, 212,
+									48, 270, 106, 270, 164, 270, 212, 270, 270, 270, 328, 270,
+									48, 328, 106, 328, 164, 328, 212, 328, 270, 328, 328, 328}
+
+	private double[] bunkerPos = { }
+
 	public Game() {
 		HeroShot = new Shot();
 		EvilBomb = new Bomb();
@@ -30,8 +45,11 @@ public class Game
 		
 		HeroShot = new Shot(-1, -1, -1, false);
 		
-		Invader[] invaders = new Invader[ARMY];
-		Bunker[] bunkers = new Bunker[COVER];
+		invaders = new Invader[INIT_INVADERS];
+		for (int i = 0; i < invaders.length; i += 2) {
+			invaders[i] = new Invader(invaderPos[i], invaderPos[i+1]);
+		}
+		bunkers = new Bunker[INIT_BUNKERS];
 	}
 	
 	// Uppfærir stöðu allra hluta í leiknum
