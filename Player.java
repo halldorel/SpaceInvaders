@@ -64,7 +64,7 @@ public class Gun
 	
 	public void renderExplosion()
 	{
-		id (d.isAlive())
+		if (d.isAlive())
 			{	d.render();	}
 	}
 	
