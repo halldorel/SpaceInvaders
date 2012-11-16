@@ -3,29 +3,36 @@ public class Game
 	// Dx stjórnar hraða og stefnu óvinanna.
 	private int Dx = 1;
 	
+	//Fjöldi invadera
+	private static final int ARMY = 32;
+	private static final int COVER = 5;
+	
 	//Git 2
 	
 	private boolean running = true;
 	
 	public Gun player;
 	
-	public Game()
-	{
-		
-		player = new Gun();
-		
+	public Game() {
+		hero = new Hero();
+		shot = new Shot();
+		bomb = new Bomb();
+		Invader[] invaders = new Invader[ARMY];
+		Bunker[] bunkers = new Bunker[COVER];
 	}
 	
-	// Muna: búa til nýtt fylki af Invader-um
-	// Búa til player, shot, bomb
+	// Uppfærir stöðu allra hluta í leiknum
 	
-	public void update()
-	{
+	public void update() {
+		hero.update();
 		shot.update();
 		bomb.update();
-		player.update();
-		for (int i = 0; i < invaders.length; i++)
-			{	invaders[i].update();	}
+		for (int i = 0; i < invaders.length; i++) {
+			invaders[i].update();
+		}
+		for(int i = 0; i < bunkers.length; i++) {
+			bunkers[i].update();
+		}
 	}
 	
 	/*
@@ -35,13 +42,15 @@ public class Game
 	 */
 	public void render()
 	{
-		StdDraw.clear();
+		hero.render();
 		shot.render();
 		bomb.render();
-		player.render();
-		for (int i = 0; i < invaders.length; i++)
-			{	invaders[i].render();	}
-			
+		for (int i = 0; i < invaders.length; i++) {
+			invaders[i].render();
+		}
+		for(int i = 0; i < bunkers.length; i++) {
+			bunkers[i].render();
+		}
 	}
 	
 	/*
