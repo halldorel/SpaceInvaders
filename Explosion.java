@@ -5,8 +5,11 @@ public class Explosion
 	
 	private Particle[] particles;
 	private double x, y;				// Núllpunktur sprengingar
-	private double gravity;
 	private int size, state;
+	
+	// SLR er slew rate limiter lætur update() keyra
+	// einungis í annað hvert skipti sem kallað er á það.
+	private byte SLR = 0;
 	
 	
 	public Explosion(int size, double x, double y) {
@@ -18,17 +21,21 @@ public class Explosion
 	}
 	
 	public void update() {
-		if (this.state != DEAD) {
-			boolean isDead = true;
-			for (int i = 0; i < particles.length; i++) {
-				if (particles[i].isAlive()) {
-					particles[i].update();
-					isDead = false;
+		if (SLR == 1) {
+			if (this.state != DEAD) {
+				boolean isDead = true;
+				for (int i = 0; i < particles.length; i++) {
+					if (particles[i].isAlive()) {
+						particles[i].update();
+						isDead = false;
+					}
 				}
+				if (isDead)
+					{	this.state = DEAD;	}
 			}
-			if (isDead)
-				{	this.state = DEAD;	}
+			SLR = 0;
 		}
+		SLR++;
 	}
 	
 /*	

@@ -8,10 +8,12 @@ public class Particle
 	
 	private static final int MAX_RADIUS = 3;
 	private static final int MIN_RADIUS = 2;	
-	private static final int MAX_SPEED = 12;
+	private static final int MAX_SPEED = 7;
 		
 	private int state;
 	
+	// Decay er bæði þyngdarafl og það sem lætur agnir dofna
+	private double decay = 0;
 	private double x, y, radius;
 	private double velX, velY;
 	private int red, green, blue, alpha;
@@ -54,10 +56,13 @@ public class Particle
 		// Hægjum á ögnum sem eru bæði með hátt velX og hátt velY
 		if ((velX * velX + velY * velY) > MAX_SPEED * MAX_SPEED)
 			{	velX *= 0.65;	velY *= 0.65;	}
-			
-		this.red = r.nextInt(255);
-		this.green = r.nextInt(255);
-		this.blue = r.nextInt(255);
+		
+		
+		// Random litur á ögn, hver þáttur á bilinu 160 - 255
+		// nema alpha sem er á bilinu 200 - 255.
+		this.red = r.nextInt(95) + 160;
+		this.green = r.nextInt(95) + 160;
+		this.blue = r.nextInt(95) + 160;
 		this.alpha = r.nextInt(55) + 200;
 		
 		this.color = new Color(red, green, blue, alpha);
@@ -68,9 +73,10 @@ public class Particle
 	public void update() {
 		if (this.state != DEAD) {
 			this.x += this.velX;
-			this.y += this.velY;
+			this.y += this.velY - (decay / 4);
 			
-			this.alpha -= 3;
+			this.alpha -= (decay / 16);
+			decay++;
 			if (alpha <= 0)
 				{	this.state = DEAD;	}
 			else {
