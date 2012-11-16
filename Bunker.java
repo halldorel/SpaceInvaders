@@ -33,7 +33,7 @@ public class Bunker
 	public void render()
 	{
 		for (int i = 0; i < bricks.length; i++)
-			{	bricks[i].render;	}
+			{	bricks[i].render();	}
 	}
 	
 }
