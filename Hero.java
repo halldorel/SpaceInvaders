@@ -61,19 +61,15 @@ public class Hero
 			
 		
 		if (StdDraw.isKeyPressed(LEFT))
-			{
-				if (this.xpos > MIN_X)
-				{
-					hero.setX(hero.getX() - DX);
-				}
-			}
+		{
+			if (this.xpos > MIN_X)
+				{	xpos = (xpos - DX);		}
+		}
 		else if (StdDraw.isKeyPressed(RIGHT))
-			{
-				if (this.xpos < MAX_X)
-				{
-					hero.setX(hero.getX() + DX);
-				}
-			}
+		{
+			if (this.xpos < MAX_X)
+				{	xpos = (xpos + DX);		}
+		}
 		
 		explosion.update();
 
