@@ -93,7 +93,7 @@ public class Particle
 		update();
 	}
 		
-	public void draw() {
+	public void render() {
 		StdDraw.setPenColor(this.color);
 		StdDraw.filledSquare(this.x, this.y, this.radius);
 	}

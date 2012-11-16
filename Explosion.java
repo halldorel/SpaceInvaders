@@ -46,10 +46,10 @@ public class Explosion
 		}
 	}
 	
-	public void draw() {
+	public void render() {
 		for (int i = 0; i < particles.length; i++) {
 			if (particles[i].isAlive) {
-				particles[i].draw();
+				particles[i].render();
 			}
 		}
 	}
