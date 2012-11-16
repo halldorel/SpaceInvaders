@@ -9,7 +9,7 @@ public class explosionTest
 	{
 		
 		StdDraw.clear(Color.BLACK);
-		a = new Explosion(20, 200.0, 200.0);
+		a = new Explosion(20, 256.0, 256.0);
 		
 		StdDraw.setScale(0.0, 512.0);
 		long startTime = System.currentTimeMillis();
@@ -21,9 +21,8 @@ public class explosionTest
 		for (;;)
 		{
 
-			StdDraw.clear(Color.BLACK);
 			if (System.currentTimeMillis() - startTime > 2000) {
-				a = new Explosion(20, 200.0, 200.0);
+				a = new Explosion(20, 256.0, 256.0);
 				startTime = System.currentTimeMillis();
 			}
 			
@@ -31,12 +30,12 @@ public class explosionTest
 			delta += (now - lastTime) / ns;
 			lastTime = now;
 			while (delta >= 1) {
-				a.update();
+				a.update(true);
 				delta--;
 			}
+			StdDraw.clear(Color.BLACK);
 			a.render();
 		}
 	}
 	
 }
-		

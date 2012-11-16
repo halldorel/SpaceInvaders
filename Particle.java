@@ -85,18 +85,19 @@ public class Particle
 		}
 	}
 
-/*	
+	
 	// Ef við viljum að agnirnar skoppi af rammanum
-	public void update(Rectangle box) {
+	public void update(boolean b) {
 		if (this.state != DEAD) {
-			if (this.x <= box.getX() + this.radius || this.x >= box.getWidth() - this.radius)
+			if (x <= 0 || x >= 512) {
 				this.velX *= -1;
-			if (this.y <= box.getY() + this.radius || this.y >= box.getHeight() - this.radius)
+			}
+			if (y <= 0 || y >= 512)
 				this.velY *= -1;
 		}
 		update();
 	}
-*/
+
 		
 	public void render() {
 		StdDraw.setPenColor(this.color);

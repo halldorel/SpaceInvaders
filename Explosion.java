@@ -38,14 +38,14 @@ public class Explosion
 		SLR++;
 	}
 	
-/*	
+
 	// Ef við viljum að agnirnar skoppi af rammanum
-	public void update(Rectangle box) {
+	public void update(boolean b) {
 		if (this.state != DEAD) {
 			boolean isDead = true;
 			for (int i = 0; i < particles.length; i++) {
 				if (particles[i].isAlive()) {
-					particles[i].update(box);
+					particles[i].update(b);
 					isDead = false;
 				}
 			}
@@ -53,7 +53,7 @@ public class Explosion
 				{	this.state = DEAD;	}
 		}
 	}
-*/	
+	
 	public void render() {
 		for (int i = 0; i < particles.length; i++) {
 			if (particles[i].isAlive()) {
