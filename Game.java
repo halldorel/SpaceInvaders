@@ -8,9 +8,12 @@ public class Game
 	private static final int ARMY = 32;
 	private static final int COVER = 5;
 	
-	//Git 2
+	//Shot 
+	public Shot HeroShot;
+	public Shot EvilBomb;
 	
 	private boolean running = true;
+	
 	
 	public Gun player;
 	
