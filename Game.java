@@ -3,6 +3,7 @@ public class Game
 	// Dx stjórnar hraða og stefnu óvinanna.
 	private int Dx = 1;
 	
+	
 	//Fjöldi invadera
 	private static final int ARMY = 32;
 	private static final int COVER = 5;
@@ -12,6 +13,13 @@ public class Game
 	private boolean running = true;
 	
 	public Gun player;
+	
+	public Rectangle GameFrame(double x0, double y0, double w, double h) {
+		x0 = 256;
+		xy = 256;
+		w = 512;
+		h = 512;
+	}
 	
 	public Game() {
 		hero = new Hero();
