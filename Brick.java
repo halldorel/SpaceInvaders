@@ -4,7 +4,7 @@ public class Brick
 	private static final int DEAD = 0;
 	private static final int INIT_LIVES = 3;
 	
-	public static final int RADIUS = 16;
+	public static final int RADIUS = 8;
 	
 	private final double x, y;
 	private final Rectangle Bounds;
@@ -56,7 +56,7 @@ public class Brick
 			} else if (lives == 2) {
 				StdDraw.picture(x, y, "/img/wall2.png");
 			} else {
-				StdDraw.picture(x, y, "/img/wall2.png2");
+				StdDraw.picture(x, y, "/img/wall3.png2");
 			}
 		}
 	}
