@@ -14,8 +14,7 @@ public class Game
 	
 	private boolean running = true;
 	
-	
-	public Gun player;
+	public Hero hero;
 	
 	public Rectangle GameFrame(double x0, double y0, double w, double h) {
 		x0 = 256;
@@ -25,9 +24,12 @@ public class Game
 	}
 	
 	public Game() {
+		HeroShot = new Shot();
+		EvilBomb = new Bomb();
 		hero = new Hero();
-		shot = new Shot();
-		bomb = new Bomb();
+		
+		HeroShot = new Shot(-1, -1, -1, false);
+		
 		Invader[] invaders = new Invader[ARMY];
 		Bunker[] bunkers = new Bunker[COVER];
 	}
@@ -35,9 +37,9 @@ public class Game
 	// Uppfærir stöðu allra hluta í leiknum
 	
 	public void update() {
+		HeroShot.update();
+		EvilBomb.update();
 		hero.update();
-		shot.update();
-		bomb.update();
 		for (int i = 0; i < invaders.length; i++) {
 			invaders[i].update();
 		}
@@ -53,9 +55,9 @@ public class Game
 	 */
 	public void render()
 	{
+		HeroShot.render();
+		EvilBomb.render();
 		hero.render();
-		shot.render();
-		bomb.render();
 		for (int i = 0; i < invaders.length; i++) {
 			invaders[i].render();
 		}

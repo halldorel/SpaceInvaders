@@ -9,8 +9,8 @@ public class Shot
 	private static final boolean ALIVE = true;
 	private static final boolean DEAD = false;
 	
-	//Direction true ef um Hero er að ræða, false ef um invader er að ræða
-	private boolean direction;
+	//Direction > 0 ef um Hero er að ræða, < 0 ef um invader er að ræða
+	private int direction;
 	
 	private final static double INIT_YPOS = 1.0;
 	private final static double SIZE = 4.0;
@@ -22,7 +22,7 @@ public class Shot
 	// Er skotið innan skjáramma?
 	private boolean status;
 	
-	public Shot(double x, double y, boolean direction, boolean status) {
+	public Shot(double x, double y, int direction, boolean status) {
 		this.x = x;
 		this.y = INIT_YPOS;
 		this.status = status;
@@ -32,18 +32,18 @@ public class Shot
 	
 	public void update() {
 		if(status) {
-			if(direction) bounds.setY(this.bounds.getY() + SPEED);
+			if(direction > 0) bounds.setY(this.bounds.getY() + SPEED);
 			else bounds.setY(this.bounds.getY() - SPEED);
 			
 		}
 	}
 	
 	public void kill() {
-		status = DEAD;
+		this.status = DEAD;
 	}
 	
 	public void draw() {
-		if(status) {
+		if(this.status) {
 			bounds.show();
 		}
 	}
