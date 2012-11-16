@@ -6,6 +6,9 @@ public class Hero
 	//  0 < x < 512 staðsetning hetju
 	private double xpos;
 	
+	//Hraði hetju
+	private static final int SPEED = 4;
+	
 	// Búum til Rectangle hlut fyrir hetjuna
 	private Rectangle hero;
 	
@@ -40,14 +43,14 @@ public class Hero
 			{
 				if (this.xpos > MIN_X)
 				{
-					hero.setX(hero.getX() - 4);
+					hero.setX(hero.getX() - SPEED);
 				}
 			}
 		else if (StdDraw.isKeyPressed(RIGHT))
 			{
 				if (this.xpos < MAX_X)
 				{
-					hero.setX(hero.getX() + 4);
+					hero.setX(hero.getX() + SPEED);
 				}
 			}
 	}
