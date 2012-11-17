@@ -1,3 +1,10 @@
+/*
+ * Þessi klasi býr til sprengingar með hjálp Particles klasans
+ * hver sprenging er búin til úr N ögnum sem hafa slembinn
+ * upphafshraða og slembna upphafsstefnu.
+ */
+
+
 public class Explosion
 {
 	public static final int ALIVE = 1;	// Ef amk. ein ögn er eftir

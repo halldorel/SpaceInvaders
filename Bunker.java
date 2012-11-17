@@ -1,6 +1,13 @@
+/*
+ * Klasi fyrir byrgi sem leikmaður getur falið sig bak við.
+ * Hvert byrgi er samsett úr fimm Brick hlutum sem hver um 
+ * sig hefur þrjú líf og mismunandi útlit fyrir hvert stig
+ * af skaða.
+ */
+
 public class Bunker
 {
-	private static final int NUM_OF_BRICKS = 5;
+	private static final int NUMBER_OF_BRICKS = 5;
 	
 	private double x, y;
 	private Brick[] bricks;
@@ -10,7 +17,7 @@ public class Bunker
 		this.x = x;
 		this.y = y;
 		
-		bricks = new Brick[NUM_OF_BRICKS];
+		bricks = new Brick[NUMBER_OF_BRICKS];
 		
 		// Init fyrir brick fylki: býr til lögunina á bunker
 		// m.t.t upphafshnita x og y.

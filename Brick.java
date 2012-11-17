@@ -1,3 +1,9 @@
+/*
+ * Klasi fyrir múrsteina sem byrgi eru byggð úr.
+ * Hver múrsteinn hefur þrjú líf og þrjú tilsvarandi
+ * stig eyðileggingar.
+ */
+
 public class Brick
 {
 	private static final int ALIVE = 1;

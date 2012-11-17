@@ -1,3 +1,9 @@
+/*
+ * Þessi klasi býr til eina ögn á hnitum x, y og gefur
+ * henni slembna stefnu, hraða, lit (upp að vissu marki)
+ */
+
+
 import java.util.Random;
 import java.awt.Color;
 
