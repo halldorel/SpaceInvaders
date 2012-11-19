@@ -53,6 +53,7 @@ public class Rectangle {
 		if(bottomA.contains((b.x)) && sideA.contains((b.y))) return true;
 		else return false;
 	}
+
 	
 	// Notkun: x = getX();
 	// Eftir: skilar x-hniti

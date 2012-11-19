@@ -31,10 +31,10 @@ public class Bunker
 		
 	}
 	
-	public void update()
+	public void update(Shot HeroShot, Shot EvilBomb)
 	{
 		for (int i = 0; i < bricks.length; i++)
-			{	bricks[i].update();		}
+			{	bricks[i].update(HeroShot, EvilBomb);		}
 	}
 	
 	public void render()
