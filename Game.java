@@ -1,8 +1,9 @@
 public class Game
 {
 	// Dx stjórnar hraða og stefnu óvinanna.
-	//private int Dx = 4;
-	public boolean xDir; //Hægri til vinstri er true, vinstri til hægri er false
+	private int Dx = 4;
+	// 
+	private boolean Dx = false;
 	
 	//Fjöldi invadera
 	private static final int INIT_INVADERS = 36;
@@ -89,8 +90,11 @@ public class Game
 		
 			for (int i = 0; i < invaders.length; i++) {
 				if (invaders[i].getBounds().intersects(gameFrame)) {
-					xDir = !xDir;
+					Dx = (Dx > 0) ? (-1 * Dx) + 1 : (-1 * Dx) - 1;
+					Dy = true;
 					break;
+				} else {
+					Dy = false;
 				}
 			}
 		
@@ -104,7 +108,7 @@ public class Game
 			}
 		
 			for(int i = 0; i < invaders.length; i++) {
-				invaders[i].update(xDir);
+				invaders[i].update(Dx, Dy);
 			}
 			
 			for(int i = 0; i < bunkers.length; i++) {
