@@ -1,4 +1,4 @@
-﻿import java.awt.*;
+import java.awt.*;
 import java.awt.event.*;
 
 public class Hero
@@ -10,18 +10,13 @@ public class Hero
 	private static final int SPEED = 4;
 	
 	// Búum til Rectangle hlut fyrir hetjuna
-	private Rectangle hero;
+	private Rectangle bounds;
 	
 	// y staðsetning hetju
 	private static double ypos = 0;
-	
-	// Leyfilegt svæði hetju
-	private static final double MIN_X = 0;
-	private static final double MAX_X = 512;
-{			
+
 	// Fastar
 	private static final int DX = 4;
-
 	private static final int X_OFFSET = 5;
 	
 	// Leyfilegt svæði hetju
@@ -41,24 +36,15 @@ public class Hero
 	
 	// Constructor
 	private static final int INIT_LIVES = 5;
-	
-	//  0 < x < 512 staðsetning hetju
-	private double xpos;
-	// y staðsetning hetju
-	private static double ypos = 0;
-	// Búum til Rectangle hlut fyrir hetjuna
-	private Rectangle bounds;
+
 	private int lives;
 	private Explosion explosion;
-	private boolean alive;
-	
 	
 	public Hero(double xpos)
 	{
 		this.xpos = xpos;
 		// ATH hér eru einhverjar temp stærðir á hetju (30, 10))
 		this.bounds = new Rectangle(xpos, ypos, 30, 10);
-		this.hero = new Rectangle(xpos, ypos, 30, 10);
 		this.lives = INIT_LIVES;
 		this.alive = true;
 		
@@ -71,16 +57,16 @@ public class Hero
 	{
 		return this.xpos;
 	}
-
-
-
+	
 	public void update()
 	{
 	
-		if (this.collides(game.EvilBomb) {
+		if (this.collides(game.EvilBomb))
+		{
 			this.lives--;
 			explosion = new Explosion(20, xpos, ypos);
 		}
+		
 		if (lives <= 0)
 			{	this.alive = false;	}
 			
@@ -88,19 +74,22 @@ public class Hero
 		if (StdDraw.isKeyPressed(LEFT))
 			{
 				// GAME FRAME - breyta skv Game.java
-				if (this.xpos > MIN_X + WIDTH/2)
+				if (this.bounds.getX() > MIN_X + WIDTH/2)
 				{
-					bounds.setX(bounds.getX() - SPEED);
+					this.bounds.setX(bounds.getX() - SPEED);
 				}
 			}
 		else if (StdDraw.isKeyPressed(RIGHT))
 			{
 				// GAME FRAME
-				if (this.xpos < MAX_X - WIDTH/2)
+				if (this.bounds.getX() < MAX_X - WIDTH/2)
 				{
-					bounds.setX(bounds.getX() + SPEED);
+					this.bounds.setX(bounds.getX() + SPEED);
 				}
 			}
+			
+			explosion.update();
+
 	}
 	
 	// Er leikmaður lifandi?
@@ -123,41 +112,24 @@ public class Hero
 	public boolean collides(Rectangle r)
 	{
 		return this.bounds.intersects(r);
-		{
-			if (this.xpos > MIN_X)
-				{	xpos = (xpos - DX);		}
-		}
-		else if (StdDraw.isKeyPressed(RIGHT))
-		{
-			if (this.xpos < MAX_X)
-				{	xpos = (xpos + DX);		}
-		}
-		
-		explosion.update();
-
 	}
-	
-	
 	
 	public void render()
 	{
-		if this(alive) {
-			hero.show();
+		if (this.alive) {
+			bounds.show();
 		}
 		explosion.render();
 	}
 		
 	public void shoot()
 	{
-		game.HeroShot = new Shot(xpos, ypos, true, true);
+		game.HeroShot = new Shot(xpos, ypos, 1, true);
 	}
-
-	// Test client
+	
 	public static void main(String[] args)
 	{
-		while(true)
-		{
-			StdDraw.rectangle(1, 1, 1, 1);
-		}
+		
 	}
+	
 }
