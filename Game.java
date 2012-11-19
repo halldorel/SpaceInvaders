@@ -41,8 +41,8 @@ public class Game
 		// Hero initialized
 		{
 			lives = INIT_LIVES;
-			hero = new Hero(256);
 			HeroShot = new Shot(-1, -1, 1, false);
+			hero = new Hero(256, HeroShot);
 			heroExplosion = new Explosion(0, 1, 1);
 		}
 		
