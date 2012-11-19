@@ -47,9 +47,9 @@ public class Shot
 		this.status = false;
 	}
 	
-	public void draw() {
+	public void render() {
 		if(this.status) {
-			bounds.show();
+			getBounds().show();
 		}
 	}
 }

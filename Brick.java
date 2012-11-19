@@ -12,7 +12,7 @@ public class Brick
 	
 	private final double x, y;
 	private final Rectangle bounds;
-	private int alive;
+	private boolean alive;
 	private int lives;
 	
 	public Explosion b;
@@ -67,11 +67,11 @@ public class Brick
 	{
 		if (this.isAlive()) {
 			if (lives == 3) {
-				StdDraw.picture(x, y, "/img/wall1.png");
+				StdDraw.picture(x, y, "/src/img/wall1.png");
 			} else if (lives == 2) {
-				StdDraw.picture(x, y, "/img/wall2.png");
+				StdDraw.picture(x, y, "/src/img/wall2.png");
 			} else {
-				StdDraw.picture(x, y, "/img/wall3.png2");
+				StdDraw.picture(x, y, "/src/img/wall3.png2");
 			}
 		}
 		b.render();

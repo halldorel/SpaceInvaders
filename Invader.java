@@ -29,11 +29,6 @@ public class Invader {
 		return this.y;
 	}
 	
-	public void explode() {
-		status = false;
-		Explosion e = new Explosion(50, x + WIDTH/2, y + HEIGHT/2 );
-	}
-	
 	public void shoot() {
 		this.EvilBomb = new Shot(this.x, this.y, -1, true);
 	}

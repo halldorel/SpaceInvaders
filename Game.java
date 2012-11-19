@@ -1,3 +1,5 @@
+import java.awt.Color;
+
 public class Game
 {
 	// Dx stjórnar hraða og stefnu óvinanna.
@@ -9,6 +11,8 @@ public class Game
 	private static final int INIT_INVADERS = 36;
 	private static final int INIT_BUNKERS = 5;
 	private static final int INIT_LIVES = 5;
+	
+	private int counter = 0;
 	
 	//Shot 
 	private Shot HeroShot;
@@ -38,13 +42,14 @@ public class Game
 	private double[] bunkerPos = { 0, 0, 70, 0, 140, 0, 210, 0, 280, 0 };
 
 	public Game() {
+		StdDraw.setScale(0, 512);
 		gameFrame = new Rectangle(256, 256, 511, 511);
 		
 		// Hero initialized
 		{
+			hero = new Hero(256.0, HeroShot);
 			lives = INIT_LIVES;
 			HeroShot = new Shot(-1, -1, 1, false);
-			hero = new Hero(256, HeroShot);
 			heroExplosion = new Explosion(0, 1, 1);
 		}
 		
@@ -128,7 +133,16 @@ public class Game
 	 */
 	public void render()
 	{
-		gameFrame.show();
+		StdDraw.clear(Color.WHITE);
+		Color color = new Color(255, 255, 100);
+		
+		color = new Color(counter, counter, counter);
+		
+		counter = (counter + 2) % 255;
+		
+			StdDraw.setPenColor(color);
+			StdDraw.filledRectangle(256,256,100,100);
+		
 		HeroShot.render();
 		EvilBomb.render();
 		hero.render();

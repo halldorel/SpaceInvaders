@@ -4,7 +4,7 @@ import java.awt.event.*;
 public class Hero
 {
 	//  0 < x < 512 staðsetning hetju
-	private double xpos;
+	private double x;
 	
 	// Hraði hetju
 	private static final int SPEED = 4;
@@ -13,7 +13,7 @@ public class Hero
 	private Rectangle bounds;
 	
 	// y staðsetning hetju
-	private static double ypos = 0;
+	private static double y = 0;
 
 	// Stærð hetju
 	private static final int WIDTH = 30;
@@ -42,11 +42,9 @@ public class Hero
 	private Explosion explosion;
 	private Shot HeroShot;
 	
-	public Hero(double xpos, Shot HeroShot)
+	public Hero(double x, Shot HeroShot)
 	{
-		this.xpos = xpos;
-		// ATH hér eru einhverjar temp stærðir á hetju (30, 10))
-		this.bounds = new Rectangle(xpos, ypos, 30, 10);
+		this.x = x;
 		this.lives = INIT_LIVES;
 		this.alive = true;
 		this.HeroShot = HeroShot;
@@ -56,9 +54,17 @@ public class Hero
 		explosion = new Explosion(0, 1, 1);
 	}
 	
-	public double getX()
-	{
-		return this.xpos;
+	public double getX() {
+		return this.x;
+	}
+	
+	public double getY() {
+		return this.y;
+	}
+	
+	public Rectangle getBounds() {
+		bounds = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
+		return bounds;
 	}
 	
 	public void update()
@@ -83,14 +89,8 @@ public class Hero
 				{
 					this.bounds.setX(bounds.getX() + SPEED);
 				}
-			}
-		
-		if (StdDraw.isKeyPressed(SPACE))
-			{	shoot();	}
-		
-			
+			}	
 		explosion.update();
-
 	}
 	
 	// Er leikmaður lifandi?
@@ -102,32 +102,15 @@ public class Hero
 	public void subtractLive()
 	{
 		lives--;
-		explosion = new Explosion(20, xpos, ypos);
-	}
-
-
-	public boolean collides(Rectangle r)
-	{
-		return this.bounds.intersects(r);
+		explosion = new Explosion(20, x, y);
 	}
 	
 	public void render()
 	{
 		if (this.alive) {
-			bounds.show();
-			StdDraw.picture(xpos, ypos, "/img/gun.png"); 
+			(this.getBounds()).show();
+			StdDraw.picture(x, y, "/src/img/gun.png"); 
 		}
-		explosion.render();
+		//explosion.render();
 	}
-		
-	public void shoot()
-	{
-		game.HeroShot = new Shot(xpos, ypos, 1, true);
-	}
-	
-	public static void main(String[] args)
-	{
-		
-	}
-	
 }
