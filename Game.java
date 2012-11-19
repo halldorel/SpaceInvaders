@@ -3,7 +3,7 @@ public class Game
 	// Dx stjórnar hraða og stefnu óvinanna.
 	private int Dx = 4;
 	// 
-	private boolean Dx = false;
+	private boolean Dy = false;
 	
 	//Fjöldi invadera
 	private static final int INIT_INVADERS = 36;
@@ -49,7 +49,6 @@ public class Game
 		
 		// Invaders initialized
 		{
-			xDir = true;
 		
 			Invader[] invaders = new Invader[INIT_INVADERS];
 			for (int i = 0; i < invaders.length; i += 2) {
@@ -184,13 +183,7 @@ public class Game
 	
 	public void stop()
 		{	running = false;	}
-	
-	//boolean xDir í stað int Dx
-	public boolean getxDir()
-		{	return xDir;	}
-	
-	public void setxDir(boolean xDir)
-		{	this.xDir = xDir;	}
+
 
 	
 }
