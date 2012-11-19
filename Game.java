@@ -24,6 +24,7 @@ public class Game
 	
 	private Invader[] invaders;
 	private Explosion invExplosion;
+	
 	private Bunker[] bunkers;
 	private Explosion bunkerExplosion;
 	

@@ -10,8 +10,9 @@ public class Invader {
 	private double x, y;
 	private Rectangle bounds;
 	private boolean status;
-	public Shot EvilBomb;
-	private boolean xDir;
+	private Shot EvilBomb;
+	
+	private double deltaY = 16;
 	
 	public Invader(double x, double y, Shot EvilBomb) {
 		this.status = ALIVE;
@@ -45,21 +46,15 @@ public class Invader {
 		bounds = new Rectangle(this.x, this.y, this.x + WIDTH, this.y + HEIGHT);
 		return bounds;
 	}
-	
-	public void move(boolean xDir) {
-		if(xDir) {
-			this.getBounds().setX(this.getBounds().getX() + 4); 
-		}
-		else this.getBounds().setX(this.getBounds().getX() - 4);
-	}
-	
-	public void update(boolean xDir) {
+
+	public void update(int Dx, boolean Dy) {
 		if(status) {
-			this.move(xDir);
+			this.x += Dx;
+			this.y = (Dy) ? y + deltaY;
 		}
 	}
 	public void render() {
-		(this.bounds).show();
+		(this.getBounds()).show();
 	}
 
 }
