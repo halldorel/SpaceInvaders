@@ -112,6 +112,7 @@ public class Game
 					//Dx = (Dx > 0) ? (-1 * Dx) + 1 : (-1 * Dx) - 1;
 					Dy = !Dy;
 					break;
+					//
 				}
 				/*if (!gameFrame.contains(invaders[i].getBounds())) {
 					Dx = (Dx > 0) ? (-1 * Dx) + 1 : (-1 * Dx) - 1;

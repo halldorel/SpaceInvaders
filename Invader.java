@@ -35,7 +35,7 @@ public class Invader {
 	}
 	
 	public void kill() {
-		status = false;
+		status = false; //
 	}
 	
 	public Rectangle getBounds() {
