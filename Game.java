@@ -54,8 +54,23 @@ public class Game
 		HeroShot.update();
 		EvilBomb.update();
 		hero.update();
+		
+		for (int i = 0; i < invaders.length; i++) {
+			if (invaders[i].getBounds().intersects(gameFrame)) {
+				xDir = !xDir;
+				break;
+			}
+		}
+		
 		for(int i = 0; i < invaders.length; i++) {
-			invaders[i].update();
+			if(invaders[i].getBounds().intersects(HeroShot.getBounds())) {
+				invaders[i].kill();
+				break;
+			}
+		}
+		
+		for(int i = 0; i < invaders.length; i++) {
+			invaders[i].update(xDir);
 		}
 		for(int i = 0; i < bunkers.length; i++) {
 			bunkers[i].update();
