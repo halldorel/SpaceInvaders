@@ -50,11 +50,10 @@ public class Invader {
 	public void update(int Dx, boolean Dy) {
 		if(status) {
 			this.x += Dx;
-			this.y = (Dy) ? y + deltaY;
+			this.y = (Dy) ? y + deltaY : y;
 		}
 	}
 	public void render() {
 		(this.getBounds()).show();
 	}
-
 }
