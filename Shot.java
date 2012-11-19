@@ -27,7 +27,7 @@ public class Shot
 		this.y = INIT_YPOS;
 		this.status = status;
 		this.direction = direction;
-		bounds = new Rectangle(x, y, WIDTH, HEIGHT);
+		//bounds = new Rectangle(x, y, WIDTH, HEIGHT);
 	}
 	
 	public void update() {
@@ -38,37 +38,18 @@ public class Shot
 		}
 	}
 	
+	public Rectangle getBounds() {
+		bounds = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
+		return bounds;
+	}
+	
 	public void kill() {
-		this.status = DEAD;
+		this.status = false;
 	}
 	
 	public void draw() {
 		if(this.status) {
 			bounds.show();
-		}
-	}
-	
-	// Testing
-	public void testDraw()
-	{
-		StdDraw.setXscale(0, 512);
-		StdDraw.setYscale(0, 512);
-		
-		draw();
-		
-		String status = "Y = " + bounds.getY();
-		StdDraw.clear();
-		//StdDraw.text(3, 3, status);
-	}
-	
-	// Test client
-	public static void main(String[] args)
-	{
-		Shot s = new Shot(256, 10, true);
-		while(true)
-		{
-			s.update();
-			s.testDraw();
 		}
 	}
 }
