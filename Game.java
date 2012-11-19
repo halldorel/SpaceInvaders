@@ -7,19 +7,24 @@ public class Game
 	//Fjöldi invadera
 	private static final int INIT_INVADERS = 36;
 	private static final int INIT_BUNKERS = 5;
+	private static final int INIT_LIVES = 5;
 	
 	//Shot 
-	public Shot HeroShot;
-	public Shot EvilBomb;
+	private Shot HeroShot;
+	private Shot EvilBomb;
 	
 	private boolean running = true;
 	
-	public Hero hero;
+	private Hero hero;
+	private int lives;
+	private Explosion heroExplosion;
 	
 	public final Rectangle gameFrame;
 	
 	private Invader[] invaders;
+	private Explosion invExplosion;
 	private Bunker[] bunkers;
+	private Explosion bunkerExplosion;
 	
 	private double[] invaderPos = { 48, 48, 106, 48, 164, 48, 212, 28, 270, 48, 328, 48,
 									48, 106, 106, 106, 164, 106, 212, 106, 270, 106, 328, 106,
@@ -32,17 +37,36 @@ public class Game
 
 	public Game() {
 		gameFrame = new Rectangle(256, 256, 511, 511);
-		Bunker[] bunkers = new Bunker[INIT_BUNKERS];
-		Shot EvilBomb = new Shot(-1, -1, -1, false);
-		Hero hero = new Hero(256);
-		Shot HeroShot = new Shot(-1, -1, 1, false);
-		xDir = true;
-		Invader[] invaders = new Invader[INIT_INVADERS];
-		for (int i = 0; i < invaders.length; i += 2) {
-			invaders[i] = new Invader(invaderPos[i], invaderPos[i+1], EvilBomb);
+		
+		// Hero initialized
+		{
+			lives = INIT_LIVES;
+			hero = new Hero(256);
+			HeroShot = new Shot(-1, -1, 1, false);
+			heroExplosion = new Explosion(0, 1, 1);
 		}
-		for (int i = 0; i < bunkers.length; i += 2) {
-			bunkers[i] = new Bunker(bunkerPos[i], bunkerPos[i+1]);
+		
+		// Invaders initialized
+		{
+			xDir = true;
+		
+			Invader[] invaders = new Invader[INIT_INVADERS];
+			for (int i = 0; i < invaders.length; i += 2) {
+				invaders[i] = new Invader(invaderPos[i], invaderPos[i+1], EvilBomb);
+			}
+			
+			EvilBomb = new Shot(-1, -1, -1, false);
+			invExplosion = new Explosion(0, 1, 1);
+		}
+		
+		// Bunkers initialized
+		{
+			Bunker[] bunkers = new Bunker[INIT_BUNKERS];
+			for (int i = 0; i < bunkers.length; i += 2) {
+				bunkers[i] = new Bunker(bunkerPos[i], bunkerPos[i+1]);
+			}
+			
+			bunkerExplosion = new Explosion(0, 1, 1);
 		}
 		
 	}
@@ -50,30 +74,46 @@ public class Game
 	// Uppfærir stöðu allra hluta í leiknum
 	
 	public void update() {
-		gameFrame.show();
-		HeroShot.update();
-		EvilBomb.update();
-		hero.update();
-		
-		for (int i = 0; i < invaders.length; i++) {
-			if (invaders[i].getBounds().intersects(gameFrame)) {
-				xDir = !xDir;
-				break;
+		if (lives > 0)
+		{
+			
+
+			HeroShot.update();
+			EvilBomb.update();
+			hero.update();
+			
+			if (hero.getBounds().intersects(EvilBomb.getBounds())) {
+				lives--;
+				heroExplosion = new Explosion(15, hero.getX(), hero.getY());
 			}
-		}
 		
-		for(int i = 0; i < invaders.length; i++) {
-			if(invaders[i].getBounds().intersects(HeroShot.getBounds())) {
-				invaders[i].kill();
-				break;
+			for (int i = 0; i < invaders.length; i++) {
+				if (invaders[i].getBounds().intersects(gameFrame)) {
+					xDir = !xDir;
+					break;
+				}
 			}
-		}
 		
-		for(int i = 0; i < invaders.length; i++) {
-			invaders[i].update(xDir);
-		}
-		for(int i = 0; i < bunkers.length; i++) {
-			bunkers[i].update();
+			for(int i = 0; i < invaders.length; i++) {
+				if(invaders[i].getBounds().intersects(HeroShot.getBounds())) {
+					invaders[i].kill();
+					invExplosion = new Explosion(15, invaders[i].getX(), invaders[i].getY());
+					HeroShot.kill();
+					break;
+				}
+			}
+		
+			for(int i = 0; i < invaders.length; i++) {
+				invaders[i].update(xDir);
+			}
+			
+			for(int i = 0; i < bunkers.length; i++) {
+				bunkers[i].update(HeroShot.getX(), HeroShot.getY(), EvilBomb.getX(), EvilBomb.getY());
+			}
+			
+			heroExplosion.update();
+			invExplosion.update();
+			bunkerExplosion.update();
 		}
 	}
 	
@@ -84,6 +124,7 @@ public class Game
 	 */
 	public void render()
 	{
+		gameFrame.show();
 		HeroShot.render();
 		EvilBomb.render();
 		hero.render();
