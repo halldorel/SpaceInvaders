@@ -3,7 +3,7 @@ public class Game
 	// Dx stjórnar hraða og stefnu óvinanna.
 	private int Dx = 4;
 	// 
-	private boolean Dx = false;
+	private boolean Dy = false;
 	
 	//Fjöldi invadera
 	private static final int INIT_INVADERS = 36;
@@ -24,6 +24,7 @@ public class Game
 	
 	private Invader[] invaders;
 	private Explosion invExplosion;
+	
 	private Bunker[] bunkers;
 	private Explosion bunkerExplosion;
 	
