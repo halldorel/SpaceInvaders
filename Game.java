@@ -108,7 +108,7 @@ public class Game
 			}
 			
 			for(int i = 0; i < bunkers.length; i++) {
-				bunkers[i].update(Shot HeroShot, Shot EvilBomb);
+				bunkers[i].update(HeroShot, EvilBomb);
 			}
 			
 			heroExplosion.update();
