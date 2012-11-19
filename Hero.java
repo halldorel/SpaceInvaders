@@ -15,22 +15,23 @@ public class Hero
 	// y staðsetning hetju
 	private static double ypos = 0;
 
+	// Stærð hetju
+	private static final int WIDTH = 30;
+	private static final int HEIGHT = 10;
+
 	// Fastar
 	private static final int DX = 4;
-	private static final int X_OFFSET = 5;
+	private static final int X_OFFSET = WIDTH/2;
 	
 	// Leyfilegt svæði hetju
 	private static final double MIN_X = 0	+X_OFFSET;
 	private static final double MAX_X = 512	-X_OFFSET;
 	
-	// Lyklar fyrir vinstri-hægri hreyfingar hetju
+	// Lyklar fyrir vinstri-hægri hreyfingar hetju og skot
 	private static final int LEFT = KeyEvent.VK_A;
 	private static final int RIGHT = KeyEvent.VK_D;
-	
-	// Stærð hetju
-	private static final int WIDTH = 30;
-	private static final int HEIGHT = 10;
-	
+	private static final int SPACE = KeyEvent.VK_SPACE;
+		
 	// Er hetja lifandi?
 	private static boolean alive = true;
 	
@@ -39,14 +40,16 @@ public class Hero
 
 	private int lives;
 	private Explosion explosion;
+	private Shot HeroShot;
 	
-	public Hero(double xpos)
+	public Hero(double xpos, Shot HeroShot)
 	{
 		this.xpos = xpos;
 		// ATH hér eru einhverjar temp stærðir á hetju (30, 10))
 		this.bounds = new Rectangle(xpos, ypos, 30, 10);
 		this.lives = INIT_LIVES;
 		this.alive = true;
+		this.HeroShot = HeroShot;
 		
 		// Búum til sprengingu af stærð núll til þess að explosion.update()
 		// krassi ekki forritinu.
@@ -60,12 +63,6 @@ public class Hero
 	
 	public void update()
 	{
-	
-		if (this.collides(game.EvilBomb))
-		{
-			this.lives--;
-			explosion = new Explosion(20, xpos, ypos);
-		}
 		
 		if (lives <= 0)
 			{	this.alive = false;	}
@@ -87,8 +84,12 @@ public class Hero
 					this.bounds.setX(bounds.getX() + SPEED);
 				}
 			}
+		
+		if (StdDraw.isKeyPressed(SPACE))
+			{	shoot();	}
+		
 			
-			explosion.update();
+		explosion.update();
 
 	}
 	
@@ -98,16 +99,12 @@ public class Hero
 		return alive;
 	}
 	
-	public void kill()
+	public void subtractLive()
 	{
-		this.alive = false;
+		lives--;
+		explosion = new Explosion(20, xpos, ypos);
 	}
 
-	public void draw()
-	{
-		// Rectangle draw
-		bounds.show();
-	}
 
 	public boolean collides(Rectangle r)
 	{
@@ -118,6 +115,7 @@ public class Hero
 	{
 		if (this.alive) {
 			bounds.show();
+			StdDraw.picture(xpos, ypos, "/img/gun.png"); 
 		}
 		explosion.render();
 	}
