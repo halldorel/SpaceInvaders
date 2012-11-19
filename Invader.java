@@ -2,8 +2,8 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Invader {
-	private static final int WIDTH = 32;
-	private static final int HEIGHT = 24;
+	private static final int WIDTH = 16;
+	private static final int HEIGHT = 16;
 	private static final boolean ALIVE = true;
 	private static final boolean DEAD = false;
 	
@@ -12,13 +12,14 @@ public class Invader {
 	private boolean status;
 	private Shot EvilBomb;
 	
-	private double deltaY = 16;
+	private double deltaY = -16;
 	
 	public Invader(double x, double y, Shot EvilBomb) {
 		this.status = ALIVE;
 		this.x = x;
 		this.y = y;
 		this.EvilBomb = EvilBomb;
+		this.status = true;
 	}
 	
 	public double getX() {
@@ -38,7 +39,7 @@ public class Invader {
 	}
 	
 	public Rectangle getBounds() {
-		bounds = new Rectangle(this.x, this.y, this.x + WIDTH, this.y + HEIGHT);
+		bounds = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
 		return bounds;
 	}
 
@@ -49,6 +50,7 @@ public class Invader {
 		}
 	}
 	public void render() {
+		//StdDraw.picture(x, y, "/src/img/wall1.png");
 		(this.getBounds()).show();
 	}
 }

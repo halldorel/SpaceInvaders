@@ -1,6 +1,8 @@
+import java.awt.*;
+import java.awt.event.*;
 public class SpaceInvaders {
 	public static void main(String[] args) {
-		Game game = new Game();
-		game.run();
+			Game game = new Game();
+			game.run();
 	}
 }
