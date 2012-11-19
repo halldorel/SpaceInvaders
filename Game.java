@@ -1,8 +1,8 @@
 public class Game
 {
 	// Dx stjórnar hraða og stefnu óvinanna.
-	private int Dx = 4;
-	
+	//private int Dx = 4;
+	public boolean xDir; //Hægri til vinstri er true, vinstri til hægri er false
 	
 	//Fjöldi invadera
 	private static final int INIT_INVADERS = 36;
@@ -16,16 +16,8 @@ public class Game
 	
 	public Hero hero;
 	
-/*	skrýtið
-
-	public Rectangle GameFrame(double x0, double y0, double w, double h) {
-		x0 = 256;
-		xy = 256;
-		w = 512;
-		h = 512;
-	}
+	public final Rectangle gameFrame;
 	
-*/
 	private Invader[] invaders;
 	private Bunker[] bunkers;
 	
@@ -36,29 +28,33 @@ public class Game
 									48, 270, 106, 270, 164, 270, 212, 270, 270, 270, 328, 270,
 									48, 328, 106, 328, 164, 328, 212, 328, 270, 328, 328, 328};
 
-	private double[] bunkerPos = { };
+	private double[] bunkerPos = { 0, 0, 70, 0, 140, 0, 210, 0, 280, 0 };
 
 	public Game() {
-		HeroShot = new Shot();
-		EvilBomb = new Bomb();
-		hero = new Hero();
-		
-		HeroShot = new Shot(-1, -1, -1, false);
-		
-		invaders = new Invader[INIT_INVADERS];
+		gameFrame = new Rectangle(256, 256, 511, 511);
+		Bunker[] bunkers = new Bunker[INIT_BUNKERS];
+		Shot EvilBomb = new Shot(-1, -1, -1, false);
+		Hero hero = new Hero(256);
+		Shot HeroShot = new Shot(-1, -1, 1, false);
+		xDir = true;
+		Invader[] invaders = new Invader[INIT_INVADERS];
 		for (int i = 0; i < invaders.length; i += 2) {
-			invaders[i] = new Invader(invaderPos[i], invaderPos[i+1]);
+			invaders[i] = new Invader(invaderPos[i], invaderPos[i+1], EvilBomb);
 		}
-		bunkers = new Bunker[INIT_BUNKERS];
+		for (int i = 0; i < bunkers.length; i += 2) {
+			bunkers[i] = new Bunker(bunkerPos[i], bunkerPos[i+1]);
+		}
+		
 	}
 	
 	// Uppfærir stöðu allra hluta í leiknum
 	
 	public void update() {
+		gameFrame.show();
 		HeroShot.update();
 		EvilBomb.update();
 		hero.update();
-		for (int i = 0; i < invaders.length; i++) {
+		for(int i = 0; i < invaders.length; i++) {
 			invaders[i].update();
 		}
 		for(int i = 0; i < bunkers.length; i++) {
@@ -129,11 +125,12 @@ public class Game
 	public void stop()
 		{	running = false;	}
 	
-	public int getDx()
-		{	return Dx;	}
+	//boolean xDir í stað int Dx
+	public boolean getxDir()
+		{	return xDir;	}
 	
-	public void setDx(int Dx)
-		{	this.Dx = Dx;	}
+	public void setxDir(boolean xDir)
+		{	this.xDir = xDir;	}
 
 	
 }
